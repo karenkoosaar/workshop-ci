@@ -14,17 +14,17 @@ jobs:
       - name: Build container
         working-directory: exercises/3
         run: |
-          docker build -t ghcr.io/NAMESPACE/workshop-ci:latest -f Dockerfile .
+          docker build -t ghcr.io/karenkoosaar/workshop-ci:latest -f Dockerfile .
       - name: Push container
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u NAMESPACE --password-stdin
-          docker push ghcr.io/NAMESPACE/workshop-ci:latest
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u karenkoosaar --password-stdin
+          docker push ghcr.io/karenkoosaar/workshop-ci:latest
   code-quality:
     name: Check code quality
     runs-on: ubuntu-latest
     needs: build-dev-container
     container:
-      image: ghcr.io/NAMESPACE/workshop-ci:latest
+      image: ghcr.io/karenkoosaar/workshop-ci:latest
       options: --user 1001
     steps:
       - uses: actions/checkout@v4
